@@ -1,0 +1,18 @@
+{
+  "BaseUrl": {
+    "baseurl": "https://demoqa.com"
+  },
+  "EndPoints": {
+    "getallbooks": "/BookStore/v1/Books",
+    "addbook": "/BookStore/v1/Books",
+    "deleteallbook": "/BookStore/v1/Books",
+    "getsinglebook": "/BookStore/v1/Book?ISBN={0}",
+    "deletesinglebook": "/BookStore/v1/Book",
+    "modifybookbyisbn": "/BookStore/v1/Books/",
+    "authoriseAccount": "/Account/v1/Authorised",
+    "generateToken": "/Account/v1/GenerateToken",
+    "addnewUser": "/Account/v1/User",
+    "deleteUserbyUserId": "/Account/v1/User/",
+    "getUserbyUserid": "/Account/v1/User/"
+  }
+}
