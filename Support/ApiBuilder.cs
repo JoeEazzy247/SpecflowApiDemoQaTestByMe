@@ -8,18 +8,24 @@ using static SpecflowApiDemoQaTestByMe.Models;
 
 namespace SpecflowApiDemoQaTestByMe.Support
 {
-    class ApiBuilder
+    public enum RespCode
     {
-        private readonly RestClient client;
-        private RestRequest request;
-        private RestResponse response;
+        OK,
+        Created
+    }
+
+    public class ApiBuilder
+    {
+        public RestClient client;
+        public RestRequest request;
+        public RestResponse response;
 
 
         public ApiBuilder()
         {
-            this.client = new RestClient();
-            this.request = new RestRequest();
-            this.response = new RestResponse();
+            client = new RestClient();
+            request = new RestRequest();
+            response = new RestResponse();
         }
 
         public ApiBuilder withClient(string url)
@@ -34,13 +40,13 @@ namespace SpecflowApiDemoQaTestByMe.Support
             return this;
         }
 
-        public ApiBuilder withJsonBody(PostBookModel method)
+        public ApiBuilder withJsonBody(object body)
         {
-            request.AddJsonBody(method);
+            request.AddJsonBody(body);
             return this;
         }
 
-        public ApiBuilder withBody(PostBookModel method)
+        public ApiBuilder withBody(object method)
         {
             request.AddBody(method);
             return this;
@@ -80,6 +86,46 @@ namespace SpecflowApiDemoQaTestByMe.Support
         public RestResponse Build<T>() where T : class
         {
             return response = client.Execute<T>(request);
+        }
+
+        public RestResponse SendRequest<T>(string url, Method method,
+            object body, Dictionary<string, string> param = null, 
+            Dictionary<string, string> userId = null, 
+            Dictionary<string, string> header = null) where T : class
+        {
+            client = new RestClient();
+            request = new RestRequest(url, method);
+            //var reqBody = body != null ? request.AddBody(body) : null;
+            if (body != null)
+            {
+                request.AddBody(body);
+            }
+
+            if (param != null)
+            {
+                foreach (var key in param.Keys)
+                {
+                    request.AddParameter(key, param[key]);
+                }
+            }
+
+            if (userId != null)
+            {
+                foreach (var key in userId.Keys)
+                {
+                    request.AddParameter(key, userId[key]);
+                }
+            }
+
+            if (header != null)
+            {
+                foreach (var key in header.Keys)
+                {
+                    request.AddParameter(key, header[key]);
+                }
+            }
+
+            return client.ExecuteAsync<T>(request).Result;
         }
     }
 }

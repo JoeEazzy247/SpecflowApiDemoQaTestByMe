@@ -61,5 +61,18 @@ namespace SpecflowApiDemoQaTestByMe
             public string userid { get; set; }
             public List<CollectOfIsbn> collectionOfIsbns { get; set; }
         }
+
+        public class UserModel
+        {
+            public string userName { get; set; }
+            public string password { get; set; }
+        }
+
+        public class UserResponseModel
+        {
+            public string userName { get; set; }
+            public string userID { get; set; }
+            public List<object> books { get; set; }
+        }
     }
 }

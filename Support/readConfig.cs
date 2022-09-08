@@ -26,5 +26,6 @@ namespace SpecflowApiDemoQaTestByMe.Support
         public static string GetBaseUrl => GetConfigData.baseUrl.baseurl;
         public static string GetAllBooksEnpoint => GetConfigData.endpoints.getallbooks;
         public static string GetSingleBookEnpoint => GetConfigData.endpoints.getsinglebook;
+        public static string AddNewUser => GetConfigData.endpoints.addnewUser;
     }
 }
