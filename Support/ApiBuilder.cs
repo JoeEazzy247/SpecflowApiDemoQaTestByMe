@@ -89,7 +89,7 @@ namespace SpecflowApiDemoQaTestByMe.Support
         }
 
         public RestResponse SendRequest<T>(string url, Method method,
-            object body, Dictionary<string, string> param = null, 
+            object body = null, Dictionary<string, string> param = null, 
             Dictionary<string, string> userId = null, 
             Dictionary<string, string> header = null) where T : class
         {

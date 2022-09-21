@@ -29,7 +29,7 @@ namespace SpecflowApiDemoQaTestByMe
             response = client.Execute<BooksResponseModel>(request);
             if (response.IsSuccessful == true)
             {
-                response.StatusCode.ToString().Should().Be("OK");
+                response.StatusCode.ToString().Should().Be(RespCode.OK.ToString());
             }
         }
 
@@ -45,7 +45,7 @@ namespace SpecflowApiDemoQaTestByMe
                     response.Content).books.First().isbn;
             if (response.IsSuccessful == true)
             {
-                response.StatusCode.ToString().Should().Be("OK");
+                response.StatusCode.ToString().Should().Be(RespCode.OK.ToString());
             }
 
             //Send a GET request to retrieve a single book with isbn with Chain method
@@ -55,13 +55,14 @@ namespace SpecflowApiDemoQaTestByMe
                 .withMethod(Method.Get).Build<BooksResponseModel>();
             if (response.IsSuccessful == true)
             {
-                response.StatusCode.ToString().Should().Be("OK");
+                response.StatusCode.ToString().Should().Be(RespCode.OK.ToString());
             }
         }
 
         [Test]
         public void GetSingleBookTest()
         {
+            //Using exisiting isbn or passing isbn manually
             request = new RestRequest(readConfig.GetBaseUrl
                 + string.Format(readConfig.GetSingleBookEnpoint, "9781449325862"),
                 Method.Get);
@@ -71,7 +72,7 @@ namespace SpecflowApiDemoQaTestByMe
 
             if (response.IsSuccessful == true)
             {
-                response.StatusCode.ToString().Should().Be("OK");
+                response.StatusCode.ToString().Should().Be(RespCode.OK.ToString());
                 books.isbn.Should().Be("9781449325862");
                 books.title.Should().Be("Git Pocket Guide");
                 books.subTitle.Should().Be("A Working Introduction");
